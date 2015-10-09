@@ -1,0 +1,51 @@
+<div ng-controller="StudentController as studentCtrl" style="padding: 8px 16px; min-height: 200px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="page-title-minor">Student Grade Calculator</span>
+        </div>
+        <div class="panel-body">
+            <div ng-form="studentCtrl.form">
+                <div class="row">
+                    <label>Name:</label>
+                    <input type="text" ng-model="studentCtrl.name" style="width: 250px" class="form-control">
+                </div>
+                <div class="row">
+                    <label>Assignment Name:</label>
+                    <input type="text" ng-required="true" ng-model="task" style="width: 250px" class="form-control">
+                </div>
+                <div class="row">
+                    <label>Assignment Score:</label>
+                    <input type="number" ng-required="true" min="0" max="100" ng-model="score" style="width: 250px"  class="form-control">
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary btn-sm" ng-click="studentCtrl.addTask(task,score)">Add</button>
+                </div>
+            </div>
+            <div >
+                <table class="table" fix-header >
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Score</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="a in studentCtrl.student.assignments">
+                            <td ng-bind="a.task"></td>
+                            <td ng-bind="a.score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <label>Average:</label><span ng-bind="studentCtrl.avg"></span>
+                <br>
+                <label>Grade:</label><span ng-bind="studentCtrl.grd"></span>
+                <br>
+                <label>Passing:</label><span ng-bind="studentCtrl.passing"></span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="workshop/Student/Student-studentCtrl.js?v=<p:ver/>"></script>

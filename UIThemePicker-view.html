@@ -1,0 +1,44 @@
+    <div ng-controller="UIThemePickerController as UIThemePickerCtrl">
+       <div ng-style="{background: UIThemePickerCtrl.bodyColor[UIThemePickerCtrl.userObjectSelection]}">
+           <h1>Pick a theme</h1>
+            <div ng-repeat="t in UIThemePickerCtrl.choices">
+                <input type="radio"
+                       name="color2"
+                       ng-value="$index"
+                       ng-model="UIThemePickerCtrl.userObjectSelection"> {{t}}
+            </div>
+
+            <div ng-style="{background: UIThemePickerCtrl.div1Color[UIThemePickerCtrl.userObjectSelection],color:UIThemePickerCtrl.fontColor[UIThemePickerCtrl.userObjectSelection]}">
+                <h2>Hello! I'm DIV 1</h2>
+            </div>
+            <div ng-style="{background: UIThemePickerCtrl.div2Color[UIThemePickerCtrl.userObjectSelection],color:UIThemePickerCtrl.fontColor[UIThemePickerCtrl.userObjectSelection]}">
+                <h2>Hello! I'm DIV 2</h2>
+            </div>
+       </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>My Files</h2>
+                <input type="checkbox" ng-model="UIThemePickerCtrl.collaps"> Hide All
+                <ul>
+                    <div ng-repeat="(key,value) in UIThemePickerCtrl.categories">
+                        <li><span ng-class="UIThemePickerCtrl.showFolder()"></span> {{key}}</li>
+                        <ul>
+                            <div ng-if="!UIThemePickerCtrl.collaps" ng-repeat="v in value">
+                                <li><span>{{v}}</span></li>
+                            </div>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <h2>Add Files</h2>
+                <input type="text" ng-model="UIThemePickerCtrl.text" placeholder="Item Name">
+                <button ng-click="UIThemePickerCtrl.addContent(UIThemePickerCtrl.idx, UIThemePickerCtrl.text)">Add Item</button>
+                <ul>
+                    <div ng-repeat="(key,value) in UIThemePickerCtrl.categories">
+                        <input type="radio" ng-value="$index" ng-model="UIThemePickerCtrl.idx">{{key}}</input>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
