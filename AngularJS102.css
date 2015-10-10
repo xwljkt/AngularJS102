@@ -2,3 +2,16 @@
     white-space: nowrap;
     padding: 3px 15px;
 }
+
+.form-control {
+    height: 26px;
+    font-size: 12px;
+    padding: 3px 6px;
+    display: inline-block;
+    width:inherit;
+    vertical-align: middle
+}
+
+table, th, td {
+    border: 1px solid #aeaeae;
+}

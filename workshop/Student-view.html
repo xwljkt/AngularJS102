@@ -1,49 +1,58 @@
-<div ng-controller="StudentController as studentCtrl" style="padding: 8px 16px; min-height: 200px;">
+<div ng-controller="StudentController as studentCtrl" style="padding: 0px 16px; min-height: 200px;">
+    <h3>Student Grade Calculator</h3>
+    <input type="text" ng-model="name" style="width: 250px" class="form-control" placeholder="Name">
+    <input type="text" ng-required="true" ng-model="task" style="width: 250px" class="form-control" placeholder="Assignment Name">
+    <input type="number" ng-required="true" min="0" max="100" ng-model="score" style="width: 250px"  class="form-control" placeholder="Assignment Score">
+    <button class="btn btn-primary btn-sm" ng-click="studentCtrl.addTask(name,task,score)">Add</button>
+
+    <hr>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="page-title-minor">Student Grade Calculator</span>
+            <span class="page-title-minor">Student Grade Summary</span>
         </div>
         <div class="panel-body">
-            <div ng-form="studentCtrl.form">
-                <div class="row">
-                    <label>Name:</label>
-                    <input type="text" ng-model="studentCtrl.name" style="width: 250px" class="form-control">
-                </div>
-                <div class="row">
-                    <label>Assignment Name:</label>
-                    <input type="text" ng-required="true" ng-model="task" style="width: 250px" class="form-control">
-                </div>
-                <div class="row">
-                    <label>Assignment Score:</label>
-                    <input type="number" ng-required="true" min="0" max="100" ng-model="score" style="width: 250px"  class="form-control">
-                </div>
-                <div class="row">
-                    <button class="btn btn-primary btn-sm" ng-click="studentCtrl.addTask(task,score)">Add</button>
-                </div>
-            </div>
-            <div >
-                <table class="table" fix-header >
+            <table width="400" ng-hide="studentCtrl.names.length==0">
+                <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Average</td>
+                    <td>Grade</td>
+                    <td>Passed</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in studentCtrl.students | orderBy: student.avg :true">
+                    <td ng-bind="student.name"></td>
+                    <td ng-bind="student.avg"></td>
+                    <td ng-bind="student.grd"></td>
+                    <td ng-bind="student.passing"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="page-title-minor">Student Grade Details</span>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="student in studentCtrl.students">
+                <table width="400">
                     <thead>
                         <tr>
-                            <td>Name</td>
+                            <td>Name <span ng-bind="student.name"></span></td>
                             <td>Score</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="a in studentCtrl.student.assignments">
+                        <tr ng-repeat="a in student.assignments">
                             <td ng-bind="a.task"></td>
                             <td ng-bind="a.score"></td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div>
-                <label>Average:</label><span ng-bind="studentCtrl.avg"></span>
-                <br>
-                <label>Grade:</label><span ng-bind="studentCtrl.grd"></span>
-                <br>
-                <label>Passing:</label><span ng-bind="studentCtrl.passing"></span>
-
+                <hr>
             </div>
         </div>
     </div>

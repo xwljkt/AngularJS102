@@ -41,29 +41,34 @@ app.controller('StudentController', function($scope, Calculator, Student) {
     self.avg = null;
     self.grd = null;
     self.passing = null;
+    self.students = [];
+    self.names = [];
 
-    self.addTask =function (task, score){
+    self.addTask =function (name, task, score){
         var assignment = {
             task:task,
             score:score
         };
-        if(!self.student)
-            self.student = new Student();
+        if(self.names.length==0 || !(self.names.indexOf(name) > -1)) {
+            console.log("new student");
+            self.student = new Student(name);
+            self.students.push(self.student);
+            self.names.push(name);
+        }
+        self.student = getStudent(name);
         self.student.addAssignment(assignment);
-        //self.assignments.push(assignment);
-        self.avg = self.getAverage();
-        self.grd = Calculator.getGrade();
-        self.passing = Calculator.isPassing();
+        self.avg = self.student.average();
+        self.grd = self.student.grade();
+        self.passing = self.student.passed();
+        console.log(self.students);
     };
 
-    self.getAverage=function(){
-        if(!self.student.assignments.length>0){
-            return undefined;
+    function getStudent (name){
+        for(var i=0;i<self.students.length;i++){
+            if(self.students[i].name == name)
+                return self.students[i];
         }
-        var a;
-        a = Calculator.average(self.student.scores);
-        return a;
-    };
+    }
 });
 
 app.controller('UserController', function () {
