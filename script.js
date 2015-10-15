@@ -20,7 +20,10 @@ app.config(function($routeProvider) {
             templateUrl : 'workshop/User-view.html',
             controller  : 'UserController'
         })
-
+        .when('/workshop/PlayList', {
+            templateUrl : 'workshop/PlayList-view.html',
+            controller  : 'PlayListController'
+        })
         // route for the contact page
         .when('/HomeworkAssignments', {
             templateUrl : 'HomeworkAssignments/UIThemePicker-view.html',
@@ -69,6 +72,60 @@ app.controller('StudentController', function($scope, Calculator, Student) {
                 return self.students[i];
         }
     }
+});
+
+app.controller('PlayListController', function($scope, MusicProfile){
+    var self = this;
+    self.genre = {
+        Pop:['Crazy 1', 'Hola 2', 'Im awesome 3'],
+        Rock:['Rock and roll 1', 'Die hard 2', 'Earthquick 3'],
+        Rap:['Fast and furious 1', 'Cannot keep up with you 2', 'General Taos 3']
+    };
+    self.playList = [];
+    self.selectedGenre = self.genre.Pop;
+    self.selectedType = 'clean';
+    self.name = null;
+    self.age = null;
+    self.names = [];
+    self.profiles = [];
+
+    self.addSong = function(song){
+        if(self.playList.indexOf(song)> -1){
+            var index = self.playList.indexOf(song);
+            if (index !== -1) {
+                self.playList.splice(index, 1);
+            }
+        }
+        else
+            self.playList.push(song);
+    };
+
+    self.showPlayList = function(){
+        if(self.names.length==0 || !(self.names.indexOf(self.name) > -1)) {
+            console.log("new profile");
+            self.profile = new MusicProfile(self.name,self.age);
+            self.profiles.push(self.profile);
+            self.names.push(self.name);
+        }
+        self.profile = getProfile(self.name);
+        self.profile.addSong(self.playList,self.selectedType);
+    };
+
+    function getProfile (name){
+        console.log(self.profiles);
+        for(var i=0;i<self.profiles.length;i++){
+            if(self.profiles[i].name == name) {
+                return self.profiles[i];
+            }
+        }
+    }
+    self.reset = function(){
+        self.name = null;
+        self.age = null;
+        self.playList = [];
+        self.selectedGenre = self.genre.Pop;
+        self.selectedType = 'clean';
+    };
 });
 
 app.controller('UserController', function () {
@@ -124,3 +181,4 @@ app.controller('UIThemePickerController', function () {
         self.text = '';
     };
 });
+

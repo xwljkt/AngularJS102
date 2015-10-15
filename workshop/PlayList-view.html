@@ -1,0 +1,57 @@
+<div ng-controller="PlayListController as playlistCtrl" style="padding: 0px 16px; min-height: 200px;">
+    <h3>About You:</h3>
+    <input type="text" ng-model="playlistCtrl.name" style="width: 250px" class="form-control" placeholder="Name">
+    <input type="number" ng-required="true" min="0" max="100" ng-model="playlistCtrl.age" style="width: 250px"  class="form-control" placeholder="Age">
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="page-title-minor">Genre</span>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="(key, value) in playlistCtrl.genre">
+                <input type="radio"
+                       name="genre"
+                       ng-init="$index==0?(playlistCtrl.selectedGenre=value):''"
+                       ng-value="value"
+                       ng-model="playlistCtrl.selectedGenre" ng-bind="key"> {{key}}
+            </div>
+        </div>
+        <div class="panel-heading">
+            <span class="page-title-minor">Allow explicit?</span>
+        </div>
+        <div class="panel-body">
+            <div>
+                <input type="radio" value="clean" ng-model="playlistCtrl.selectedType">Clean
+                <input type="radio" value="explicit" ng-model="playlistCtrl.selectedType" ng-disabled="playlistCtrl.age<16">Explicit
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <span class="page-title-minor">Songs</span>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="song in playlistCtrl.selectedGenre">
+                <input type="checkbox"
+                       name="songChoice"
+                       ng-click="playlistCtrl.addSong(song)"> {{song}}
+            </div>
+        </div>
+        <button class="btn btn-primary btn-sm" ng-click="playlistCtrl.showPlayList()">Submit</button>
+        <button class="btn btn-default btn-sm" ng-click="playlistCtrl.reset()">Reset</button>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="page-title-minor">Play Lists</span>
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="profile in playlistCtrl.profiles">
+                    <label>Name <span ng-bind="profile.name"></span></label>
+                    <label>Age <span ng-bind="profile.age"></span></label>
+                    <ul ng-repeat="item in profile.playList">{{item.title}}</ul>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>

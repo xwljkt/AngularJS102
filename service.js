@@ -52,4 +52,24 @@ angular.module('AngularJS102')
         };
 
         return Student;
+})
+
+.factory('MusicProfile', function(){
+        function MusicProfile(name,age){
+            console.log(name + age);
+            this.name = name;
+            this.age = age;
+            this.playList = [];
+        }
+
+        MusicProfile.prototype.addSong = function(list, type){
+            console.log(list);
+            var tempList = angular.copy(list);
+            this.playList = [];
+            for(var i=0;i<tempList.length;i++){
+                this.playList.push({title:tempList[i],type:type});
+            }
+        };
+
+        return MusicProfile;
 });
