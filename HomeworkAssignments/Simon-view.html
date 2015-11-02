@@ -1,0 +1,22 @@
+    <div ng-controller="SimonController as simonCtrl">
+       <div style="width: 250px" >
+           <div ng-style="{'background-color': simonCtrl.mode=='Your'?'light-pink':'light-gray'}"></div>
+           <table border="1">
+               <tr style="cursor: pointer;">
+                   <td ng-class="{'animated flash':(simonCtrl.class == 'blue'),'content':true}" ng-style="{'background-color':simonCtrl.blue}" ng-click="simonCtrl.youClicked('blue')"></td>
+                   <td ng-class="{'animated flash':(simonCtrl.class == 'orange'),'content':true}" ng-style="{'background-color':simonCtrl.orange}" ng-click="simonCtrl.youClicked('orange')"></td>
+               </tr>
+               <tr style="cursor: pointer;">
+                   <td ng-class="{'animated flash':(simonCtrl.class == 'red'),'content':true}" ng-style="{'background-color':simonCtrl.red}" ng-click="simonCtrl.youClicked('red')"></td>
+                   <td ng-class="{'animated flash':(simonCtrl.class == 'green'),'content':true}" ng-style="{'background-color':simonCtrl.green}" ng-click="simonCtrl.youClicked('green')"></td>
+               </tr>
+           </table>
+           <div>
+                <h3>{{simonCtrl.message}}</h3>
+           </div>
+           <button class="btn btn-primary btn-sm" ng-click="simonCtrl.start()" ng-if="simonCtrl.mode=='Over'">Start</button>
+           <div>
+               <span>Score: </span><span>{{simonCtrl.score}}</span>
+           </div>
+       </div>
+    </div>

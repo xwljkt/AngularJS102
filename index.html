@@ -8,6 +8,7 @@
     <!-- load bootstrap and fontawesome via CDN -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="animate.min.css">
     <link rel="stylesheet" type="text/css" href="AngularJS102.css">
 
     <!-- SPELLS -->
@@ -24,7 +25,7 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <span class="navbar-brand">{{message}}</span>
+                <span class="navbar-brand" ng-bind="message"></span>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
@@ -32,7 +33,16 @@
                 <li><a href="#workshop/Student"><i class="fa fa-shield"></i> WorkShop Student</a></li>
                 <li><a href="#workshop/User"><i class="fa fa-shield"></i> WorkShop User</a></li>
                 <li><a href="#workshop/PlayList"><i class="fa fa-shield"></i> WorkShop PlayList</a></li>
-                <li><a href="#HomeworkAssignments"><i class="fa fa-shield"></i> Theme Picker</a></li>
+                <li><a href="#HomeworkAssignments/ThemePicker"><i class="fa fa-shield"></i> Theme Picker</a></li>
+                <li><a href="#HomeworkAssignments/Simon"><i class="fa fa-shield"></i> Simon Says</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu 1 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Submenu 1-1</a></li>
+                        <li><a href="#">Submenu 1-2</a></li>
+                        <li><a href="#">Submenu 1-3</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
